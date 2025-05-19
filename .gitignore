@@ -429,6 +429,6 @@ FodyWeavers.xsd
 
 
 # 여기서 부터 제외할 파일 새로 추가
-# 모든 appsettings.json 포함
-!**/appsettings.json
-!**/appsettings.Development.json
+# 모든 appsettings.json 무시 (삭제 아님, "Git에서 무시"임)
+**/appsettings.json
+**/appsettings.Development.json
