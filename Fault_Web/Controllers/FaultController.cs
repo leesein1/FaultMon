@@ -32,5 +32,15 @@ namespace Fault_Web.Controllers
 
             return Content(jsonString, "application/json");
         }
+        [HttpGet("/Fault/GetStatToday")]
+        public IActionResult GetStatToday()
+        {
+            DataTable dt = _service.GetStatToday();
+
+            string jsonString = JsonConvert.SerializeObject(dt); // ← 핵심
+
+            return Content(jsonString, "application/json");
+        }
+        
     }
 }

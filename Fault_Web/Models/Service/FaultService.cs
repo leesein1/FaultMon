@@ -26,5 +26,15 @@ namespace Fault_Web.Models.Service
 
             return dt;
         }
+
+        public DataTable GetStatToday()
+        {
+
+            DataTable dt = _dao.GetStatToday();
+
+            return dt;
+        }
+        
+
     }
 }

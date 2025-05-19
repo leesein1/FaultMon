@@ -33,5 +33,24 @@ namespace Fault_Web.Models.Dao
             return dt;
 
         }
+
+        public DataTable GetStatToday()
+        {
+            DataTable dt = new DataTable();
+
+            using (var conn = _dbHelper.GetFLTConnection())
+            {
+                conn.Open();
+                using (var cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    string queryString = @"exec [PROC_FAULT_STATS_TODAY]";
+                    cmd.CommandText = queryString;
+                    dt.Load(cmd.ExecuteReader());
+                }
+            }
+            return dt;
+
+        }
     }
 }

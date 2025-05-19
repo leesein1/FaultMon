@@ -41,14 +41,14 @@ async function connectSignalR() {
 
     connection_db.on("Signal_FLTLIST", () => {
         console.log("✅ 확인이요 (클라이언트 메시지 받음)");
-        faultList();
+        LoadScreenData();
     });
 
     connection_db.start()
         .then(() => {
             console.log("✅ SignalR DB connection Success.");
             connection_db.invoke("GetAll");
-            faultList();
+            LoadScreenData();
         })
         .catch(err => {
             console.error("SignalR 연결 실패:", err.toString());
@@ -57,7 +57,32 @@ async function connectSignalR() {
 
 /* 이동하기전에 여기서 컨트롤러 들 마무리 할 것*/
 
+// 250519 silee 화면 현시에 필요한 데이터 함수 
+function LoadScreenData() {
+    /* 1. 함수 리스트 현시 */
+    faultList();
+    /* 2. 통게 데이터 현시 */
+    faultStatToday();
+}
 
+// 250519 silee - 실시간 통계 변동 수치 현시 
+function faultStatToday(){
+    $.ajax({
+        url: '/Fault/GetStatToday',
+        type: 'GET',
+        dataType: 'json',
+        success: function (res) {
+            console.log("통계 JSON : ", res);
+            $("#span-TotalCount").text(res[0].TotalCount);
+            $("#span-InProgressCount").text(res[0].InProgressCount);
+            $("#span-CompletedCount").text(res[0].CompletedCount);
+            $("#span-CompletedRate").text(res[0].CompletedRate);
+        },
+        error: function (xhr, status, error) {
+            console.error("오류 발생:", error);
+        }
+    });
+}
 // 250513 silee - 실시간 고장 이력
 function faultList() {
     $.ajax({
@@ -91,7 +116,7 @@ function setRecentFault(arrDB) {
     let html = '';
     let notiSetTimeString = '';
     arrMark = [], markPos = [];
-    console.log(arrDB)
+
     $("#fault-tbody-id").empty();
 
     for (let i = 0; i < arrDB.length; i++) {
@@ -109,7 +134,7 @@ function setRecentFault(arrDB) {
                 StatClassTxt = 'badge text-bg-warning';
                 break;
             case 2:
-                StatTxt = '처리중';
+                StatTxt = '수리중';
                 StatClassTxt = 'badge text-bg-info';
                 break;
             case 3:
