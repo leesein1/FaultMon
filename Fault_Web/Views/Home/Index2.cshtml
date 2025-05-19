@@ -1,0 +1,479 @@
+﻿@{
+    Layout = "_Layout-Fault";
+}  
+
+
+<!-- start::App Wrapper -->
+  <div class="app-wrapper">
+    <!-- begin::Header -->
+    <nav class="app-header navbar navbar-expand bg-black">
+      <!-- start::Container -->
+      <div class="container-fluid">
+        <!-- start::Start Navbar Links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <!-- 이 자리에 logo 위치 -->
+            <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
+              <i class="">Logo</i>
+            </a>
+          </li>
+          <!--
+          <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Home</a></li>
+          <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Contact</a></li>
+          -->
+        </ul>
+        <!-- end::Start Navbar Links -->
+
+        <!-- start::End Navbar Links -->
+        <ul class="navbar-nav ms-auto">
+          <!-- start::Messages Dropdown Menu -->
+          <li class="nav-item dropdown">
+            <a class="nav-link" data-bs-toggle="dropdown" href="#">
+              <i class="bi bi-chat-text"></i>
+              <span class="navbar-badge badge text-bg-danger">3</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+              <a href="#" class="dropdown-item">
+                <!-- start::Message -->
+                <div class="d-flex">
+                  <div class="flex-shrink-0">
+                    <img src="~/js/dist/assets/img/user1-128x128.jpg" alt="User Avatar"
+                      class="img-size-50 rounded-circle me-3" />
+                  </div>
+                  <div class="flex-grow-1">
+                    <h3 class="dropdown-item-title">
+                      Brad Diesel
+                      <span class="float-end fs-7 text-danger"><i class="bi bi-star-fill"></i></span>
+                    </h3>
+                    <p class="fs-7">Call me whenever you can...</p>
+                    <p class="fs-7 text-secondary"><i class="bi bi-clock-fill me-1"></i> 4 Hours Ago</p>
+                  </div>
+                </div>
+                <!-- end::Message -->
+              </a>
+              <div class="dropdown-divider"></div>
+
+              <a href="#" class="dropdown-item">
+                <!-- start::Message -->
+                <div class="d-flex">
+                  <div class="flex-shrink-0">
+                    <img src="~/js/dist/assets/img/user8-128x128.jpg" alt="User Avatar"
+                      class="img-size-50 rounded-circle me-3" />
+                  </div>
+                  <div class="flex-grow-1">
+                    <h3 class="dropdown-item-title">
+                      John Pierce
+                      <span class="float-end fs-7 text-secondary"><i class="bi bi-star-fill"></i></span>
+                    </h3>
+                    <p class="fs-7">I got your message bro</p>
+                    <p class="fs-7 text-secondary"><i class="bi bi-clock-fill me-1"></i> 4 Hours Ago</p>
+                  </div>
+                </div>
+                <!-- end::Message -->
+              </a>
+              <div class="dropdown-divider"></div>
+
+              <a href="#" class="dropdown-item">
+                <!-- start::Message -->
+                <div class="d-flex">
+                  <div class="flex-shrink-0">
+                    <img src="~/js/dist/assets/img/user3-128x128.jpg" alt="User Avatar"
+                      class="img-size-50 rounded-circle me-3" />
+                  </div>
+                  <div class="flex-grow-1">
+                    <h3 class="dropdown-item-title">
+                      Nora Silvester
+                      <span class="float-end fs-7 text-warning"><i class="bi bi-star-fill"></i></span>
+                    </h3>
+                    <p class="fs-7">The subject goes here</p>
+                    <p class="fs-7 text-secondary"><i class="bi bi-clock-fill me-1"></i> 4 Hours Ago</p>
+                  </div>
+                </div>
+                <!-- end::Message -->
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+            </div>
+          </li>
+          <!-- end::Messages Dropdown Menu -->
+
+          <!-- start::Notifications Dropdown Menu -->
+          <li class="nav-item dropdown">
+            <a class="nav-link" data-bs-toggle="dropdown" href="#">
+              <i class="bi bi-bell-fill"></i>
+              <span class="navbar-badge badge text-bg-warning">15</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+              <span class="dropdown-item dropdown-header">15 Notifications</span>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="bi bi-envelope me-2"></i> 4 new messages
+                <span class="float-end text-secondary fs-7">3 mins</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="bi bi-people-fill me-2"></i> 8 friend requests
+                <span class="float-end text-secondary fs-7">12 hours</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="bi bi-file-earmark-fill me-2"></i> 3 new reports
+                <span class="float-end text-secondary fs-7">2 days</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+            </div>
+          </li>
+          <!-- end::Notifications Dropdown Menu -->
+
+          <!-- start::Fullscreen Toggle -->
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-lte-toggle="fullscreen">
+              <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
+              <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none"></i>
+            </a>
+          </li>
+          <!-- end::Fullscreen Toggle -->
+        </ul>
+        <!-- end::End Navbar Links -->
+      </div>
+      <!-- end::Container -->
+    </nav>
+    <!-- end::Header -->
+
+    <!--begin::App Main-->
+    <main class="app-main bg-black">
+      <!--begin::App-content-header-->
+      <div class="app-content-header">
+        <!--begin::Container-->
+        <div class="container-fluid">
+          <!--begin::Row-->
+          <div class="row">
+            <div class="col-sm-6"><h3 class="mb-0"></h3></div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-end">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">실시간 고장 관제</li>
+              </ol>
+            </div>
+          </div>
+          <!--end::App-content-header-->
+          <!--end::Row-->
+        </div>
+        <!--end::Container-->
+      </div>
+      <!--begin::App-content-->
+      <div class="app-content">
+        <div class="container-fluid container-fluid-resize">
+        <!--begin::Row1 -->
+        <div class="row">
+          <div class="col-md-4" >
+            <!--begin:: card 최근 고장이력 현시-->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">실시간 고장이력</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse">
+                    <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                    <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-lte-toggle="card-remove">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <div class="table-responsive fault-table" >
+                  <table class="table m-0">
+                    <thead>
+                      <tr>
+                        <th>처리상태</th>
+                        <th>접수번호</th>
+                        <th>접수시간</th>
+                        <th>고장명</th>
+                        <th>담당자</th>
+                      </tr>
+                    </thead>
+
+                    <tbody id="fault-tbody-id" class="fault-tbody">
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.table-responsive -->
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!--end:: card 최근 고장이력 현시-->
+          </div>
+          <!-- begin:: map 현시 -->
+          <div class="col-md-4" >
+            <!-- begin:: 금일 발생 건수 / 처리 중 건수 / 완료 건수 / 완료율(%) -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">지도 보기</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse">
+                    <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                    <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-lte-toggle="card-remove">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body p-0">
+                <div id="map" style="height: 500px;"></div>
+              </div>
+            </div>
+            <!-- end:: 금일 발생 건수 / 처리 중 건수 / 완료 건수 / 완료율(%) -->
+          </div>
+          <!-- end:: map 현시 -->
+            
+          <!-- begin:: 우측 md 시작 -->
+          <div class="col-md-4 col-right-div">
+            <!-- begin :: 우측 md row 1 -->
+            <div class="row">
+              <!-- begin:: 금일 발생 건수 / 처리 중 건수 / 완료 건수 / 완료율(%)-->
+              <div class="row col-right-padding-none">
+                <div class="col-md-6 col-right-padding-none">
+                  <div class="info-box">
+                    <span class="info-box-icon text-bg-primary shadow-sm">
+                      <i class="bi bi-gear-fill"></i>
+                    </span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">금일 발생(건)</span>
+                      <span class="info-box-number">
+                        100
+                      </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                  </div>
+                  <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-6 col-right-padding-none">
+                  <div class="info-box">
+                    <span class="info-box-icon text-bg-danger shadow-sm">
+                      <i class="bi bi-hand-thumbs-up-fill"></i>
+                    </span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">처리중(건)</span>
+                      <span class="info-box-number">60</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                  </div>
+                  <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <div class="row col-right-padding-none">
+                <!-- fix for small devices only -->
+                <!-- <div class="clearfix hidden-md-up"></div> -->
+                <div class="col-md-6 col-right-padding-none">
+                  <div class="info-box">
+                    <span class="info-box-icon text-bg-success shadow-sm">
+                      <i class="bi bi-cart-fill"></i>
+                    </span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">완료 건</span>
+                      <span class="info-box-number">760</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                  </div>
+                  <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-6 col-right-padding-none">
+                  <div class="info-box">
+                    <span class="info-box-icon text-bg-warning shadow-sm">
+                      <i class="bi bi-people-fill"></i>
+                    </span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">완료율(%)</span>
+                      <span class="info-box-number">40 %</span>
+
+                    </div>
+                    <!-- /.info-box-content -->
+                  </div>
+                  <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- end:: 금일 발생 건수 / 처리 중 건수 / 완료 건수 / 완료율(%)-->
+            </div>
+            <!-- end :: 우측 md row 1 -->
+            <!-- begin :: 우측 md row 2 -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class ="card fault-detail">
+                  <div class="card-header">
+                    <h3 class="card-title">고장 상세</h3>
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse">
+                        <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                        <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-lte-toggle="card-remove">
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body" style="background-color: #343a40; height: 305px; overflow-y: auto; flex:0 0 auto;">
+                    <div class="flex-row-info">
+                      <div class="detail-span-box">
+                        <span class="badge rounded-pill text-bg-dark">접 수 번 호</span>
+                      </div>
+                      <div>
+                        <span></span>
+                      </div>
+                    </div>
+                    
+                    <div class="flex-row-info">
+                      <div class="detail-span-box">
+                        <span class="badge rounded-pill text-bg-dark">접 수 시 간</span>
+                      </div>
+                      <div>
+                        <span></span>
+                      </div>
+                    </div>
+                    
+                    <div class="flex-row-info">
+                      <div class="detail-span-box">
+                        <span class="badge rounded-pill text-bg-dark">배 정 시 간</span>
+                      </div>
+                      <div>
+                        <span></span>
+                      </div>
+                    </div>
+                    
+                    <div class="flex-row-info">
+                      <div class="detail-span-box">
+                        <span class="badge rounded-pill text-bg-dark">완 료 시 간</span>
+                      </div>
+                      <div>
+                        <span></span>
+                      </div>
+                    </div>
+                    
+                    <div class="flex-row-info">
+                      <div class="detail-span-box">
+                        <span class="badge rounded-pill text-bg-dark">접 수 자</span>
+                      </div>
+                      <div>
+                        <span></span>
+                      </div>
+                    </div>
+                    
+                    <div class="flex-row-info">
+                      <div class="detail-span-box">
+                        <span class="badge rounded-pill text-bg-dark">사고 차량번호</span>
+                      </div>
+                      <div>
+                        <span></span>
+                      </div>
+                    </div>
+                    
+                    <div class="flex-row-info">
+                      <div class="detail-span-box">
+                        <span class="badge rounded-pill text-bg-dark">위 치 정 보</span>
+                      </div>
+                      <div>
+                        <span class="detail-span-text">asd2</span>
+                      </div>
+                    </div>
+                  </div class="card-body">
+                  <div class="card-footer fault-detail-footer">
+                    <div style="margin-top: 15px; margin-bottom:15px; font-size: 1.1rem;">
+                      <span class="badge bg-secondary rounded-circle d-inline-flex justify-content-center align-items-center" style="width: 28px; height: 28px; vertical-align: bottom;">
+                        1
+                      </span>
+                      <span>고장 조치 사항1 을 입력하세요.</span>
+                    </div>
+                    
+                    <div style="margin-top: 15px; margin-bottom:15px; font-size: 1.1rem;">
+                      <span class="badge bg-secondary rounded-circle d-inline-flex justify-content-center align-items-center" style="width: 28px; height: 28px; vertical-align: bottom;">
+                        2
+                      </span>
+                      <span>고장 조치 사항2 을 입력하세요.</span>
+                    </div>
+                    
+                    <div style="margin-top: 15px; margin-bottom:15px; font-size: 1.1rem;">
+                      <span class="badge bg-secondary rounded-circle d-inline-flex justify-content-center align-items-center" style="width: 28px; height: 28px; vertical-align: bottom;">
+                        3
+                      </span>
+                      <span>고장 조치 사항3 을 입력하세요.</span>
+                    </div>
+                    
+                    <div style="margin-top: 15px; margin-bottom:15px; font-size: 1.1rem;">
+                      <span class="badge bg-secondary rounded-circle d-inline-flex justify-content-center align-items-center" style="width: 28px; height: 28px; vertical-align: bottom;">
+                        4
+                      </span>
+                      <span class="d-inline-flex align-items-center">고장 조치 사항4 을 입력하세요.</span>
+                    </div>                    
+                  </div>
+                </div>
+                <!-- /.card-header -->
+              </div>
+            </div>
+            <!-- end :: 우측 md row 2 -->
+          </div>
+          <!-- end:: 우측 md 끝 -->
+        </div>
+        <!--end::Row1 -->
+
+        
+        
+        </div>
+
+      </div>
+      <!--end::App-content-->
+
+      <!--begin:: modal-->
+      <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog custom-modal-size"> <!-- 👈 클래스 추가 -->
+          <div class="modal-content h-100"> <!-- 세로 채움용 h-100 -->
+            <div class="modal-header">
+              <h5 class="modal-title" id="myModalLabel">모달 제목</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+            </div>
+            <div class="modal-body overflow-auto">
+              여기에 모달 내용을 입력하세요.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--end:: modal-->
+    <!-- start::noti-->
+    <ul class="notifications" style="display:none;">
+	    <li>
+		    <button class="btn btn-primary waves-effect" data-type="inverse" data-animation-in="animated fadeIn" data-animation-out="animated fadeOut">Fade In</button>
+	    </li>
+    </ul>
+    <!--end::noti-->
+    </main>
+    <!--end::App Main-->
+
+    <!--begin::Footer-->
+    <footer class="app-footer bg-black">
+      <!--begin::To the end-->
+      <div class="float-end d-none d-sm-inline">Anything you want</div>
+      <!--end::To the end-->
+      <!--begin::Copyright-->
+      <strong>
+        Copyright &copy; 2014-2024&nbsp;
+        <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
+      </strong>
+      All rights reserved.
+      <!--end::Copyright-->
+    </footer>
+    <!--end::Footer-->
+    
+</ul>
+  </div>
+  <!-- end::App Wrapper -->
+  <!--begin::Script-->
+  <script type="module" src="~/js/index2.js"></script>

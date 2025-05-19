@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<html>
+<!-- 2550430 silee - start - cshtml 변경 시 _layout.cshtml 에 모을 것 -->
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>AdminLTE v4</title>
+  <!-- start::Primary Meta Tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="title" content="AdminLTE v4 | Dashboard" />
+  <meta name="author" content="ColorlibHQ" />
+  <meta name="description" content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS." />
+  <meta name="keywords" content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard" />
+  <!-- end::Primary Meta Tags -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <!-- start::Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@fontsource/source-sans-3@5.0.12/index.css"
+    integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous" />
+  <!-- end::Fonts -->
+
+  <!-- start::Third Party Plugin(OverlayScrollbars) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css"
+    integrity="sha256-tZHrRjVqNSRyWg2wbppGnT833E/Ys0DHWGwT04GiqQg=" crossorigin="anonymous" />
+  <!-- end::Third Party Plugin(OverlayScrollbars) -->
+
+  <!-- start::Third Party Plugin(Bootstrap Icons) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI=" crossorigin="anonymous" />
+  <!-- end::Third Party Plugin(Bootstrap Icons) -->
+
+  <!-- start::Required Plugin(AdminLTE) -->
+  <link rel="stylesheet" href="~/js/dist/css/adminlte.css" />
+  <!-- end::Required Plugin(AdminLTE) -->
+
+  <!-- start::apexcharts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css"
+    integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous" />
+  <!-- end::apexcharts -->
+
+  <!-- start::jsvectormap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css"
+    integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous" />
+  <!-- end::jsvectormap -->
+
+  <!-- start::leaflet cdn -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- end::leaflet cdn -->
+   @RenderSection("Styles", required: false)
+
+  <!--start::common.css-->
+    <link href="~/css/common.css" rel="stylesheet" />
+  <!--end::common.css-->
+
+   <!--start::SignalR-->
+    <script src="~/lib/microsoft/signalr/dist/webworker/signalr.js"></script>
+    <script src="~/lib/microsoft/signalr/dist/webworker/signalr.min.js"></script>
+   <!--end::SingnalR-->
+
+   <!-- start::noti-->
+    <script type="text/javascript" src="~/assets/js/bootstrap-growl.min.js"></script>
+    <script type="text/javascript" src="~/assets/pages/notification/notification.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/assets/icon/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/pages/notification/notification.css">
+   <!--end::noti-->
+   <!-- Animate.css -->
+   <link rel="stylesheet" type="text/css" href="~/bower_components/animate.css/css/animate.css">
+</head>
+<style>
+    #loading-cover {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(255,255,255,0.8);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary  my-card" data-bs-theme="dark">
+    <!-- 로딩 스피너 -->
+    <div id="wifi-loader">
+        <svg class="circle-outer" viewBox="0 0 86 86">
+            <circle class="back" cx="43" cy="43" r="40"></circle>
+            <circle class="front" cx="43" cy="43" r="40"></circle>
+            <circle class="new" cx="43" cy="43" r="40"></circle>
+        </svg>
+        <svg class="circle-middle" viewBox="0 0 60 60">
+            <circle class="back" cx="30" cy="30" r="27"></circle>
+            <circle class="front" cx="30" cy="30" r="27"></circle>
+        </svg>
+        <svg class="circle-inner" viewBox="0 0 34 34">
+            <circle class="back" cx="17" cy="17" r="14"></circle>
+            <circle class="front" cx="17" cy="17" r="14"></circle>
+        </svg>
+        <div class="text" data-text="Searching"></div>
+    </div>
+
+    @RenderBody()
+
+    @RenderSection("Scripts", required: false)
+
+    <!--begin::Required Plugin(popperjs for Bootstrap 5)-->
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+    <!--end::Required Plugin(popperjs for Bootstrap 5)-->
+    <!--begin::Required Plugin(Bootstrap 5)-->
+    <!-- 기본 부트스트랩 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
+    <!--end::Required Plugin(Bootstrap 5)-->
+    <!--begin::Required Plugin(AdminLTE)-->
+    <!-- 전체 화면 플러그인 -->
+    <script src="~/js/dist/js/adminlte.js"></script>
+    <!--end::Required Plugin(AdminLTE)-->
+    <!-- OPTIONAL SCRIPTS -->
+    <!--end::Script-->
+</body>
+</html>
