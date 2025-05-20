@@ -3,7 +3,7 @@
 }
 
 .custom-modal-size {
-    width: 60vw; /* 100vw - 20% x 2 */
+    width: 45vw; /* 100vw - 27.5% x 2 */
     height: 90vh; /* 100vh - 5% x 2 */
     margin: 5vh auto; /* 상하 5%, 좌우 자동 가운데 */
     max-width: none; /* 기본 제한 해제 */
@@ -238,4 +238,12 @@
         clip-path: inset(0 0 0 100%);
     }
 }
- 
+
+#fault-tbody-id tr:hover {
+    background-color: #343a40 !important;
+    color: white;
+    cursor: pointer;
+}
+.select-tr td {
+    background-color: #343a40 !important;
+}

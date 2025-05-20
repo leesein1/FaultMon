@@ -1,4 +1,4 @@
-// map.js
+// map.js ( 지도 init 담당 )
 export function initMap() {
   const map = L.map('map').setView([36.3, 127.5], 7);
 

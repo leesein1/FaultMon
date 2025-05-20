@@ -32,6 +32,7 @@ namespace Fault_Web.Controllers
 
             return Content(jsonString, "application/json");
         }
+
         [HttpGet("/Fault/GetStatToday")]
         public IActionResult GetStatToday()
         {
@@ -41,6 +42,16 @@ namespace Fault_Web.Controllers
 
             return Content(jsonString, "application/json");
         }
-        
+
+        [HttpGet("/Fault/GetFaultListDetail")]
+        public IActionResult GetFaultListDetail(int IncidentID)
+        {
+            DataTable dt = _service.GetFaultListDetail(IncidentID);
+
+            string jsonString = JsonConvert.SerializeObject(dt); // ← 핵심
+
+            return Content(jsonString, "application/json");
+        }
+
     }
 }

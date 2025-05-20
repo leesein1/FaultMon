@@ -68,20 +68,29 @@
    <link rel="stylesheet" type="text/css" href="~/bower_components/animate.css/css/animate.css">
 </head>
 <style>
-    #loading-cover {
-        position: fixed;
+    #wifi-loader {
+        position: fixed; /* 화면에 고정 */
         top: 0;
         left: 0;
         width: 100vw;
         height: 100vh;
-        background-color: rgba(255,255,255,0.8);
+        background-color: #000;
         z-index: 9999;
         display: flex;
         justify-content: center;
         align-items: center;
+        pointer-events: none;
     }
 
+    #wifi-loader.hidden {
+        display: none !important;
+    }
+
+    body {
+        overflow: hidden; /* 로딩 중 스크롤 방지 */
+    }
 </style>
+
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary  my-card" data-bs-theme="dark">
     <!-- 로딩 스피너 -->
     <div id="wifi-loader">
