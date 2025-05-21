@@ -51,7 +51,7 @@ function setRecentFault(arrDB) {
 
         // ✅ 테이블 행 구성 버퍼에 저장
         htmlBuffer.push(`
-      <tr id="tr-${row.IncidentID}"onclick="clk_tr('${row.IncidentID}',${i})">
+      <tr data-incident-id="${row.IncidentID}" id="tr-${row.IncidentID}" onclick="clk_tr('${row.IncidentID}',${i})">
         <td><span class="${StatClassTxt}">${StatTxt}</span></td>
         <td><span>${row.ReceiptNo}</span></td>
         <td><span>${formattedTime}</span></td>
@@ -159,4 +159,81 @@ function removeDetail() {
     $("#fault-detail-footer-id").empty();
 }
 
-export { setRecentFault, setFaultDetail, removeDetail };
+function setFaultDetailPop(arrDB) {
+    return new Promise((resolve, reject) => {
+        const row = arrDB[0];
+
+        const {
+            IncidentID, ReceiptNo, SetTime, FaultID, FaultName,
+            AssignedTime, EndTime, CustomerName, C_ViheicleLicense,
+            GPS_Lati, GPS_Long, LocationText, MangerID, MangerName,
+            VehicleID, Stat, FaultText, FaultAct1, FaultAct2, FaultAct3,
+            MangerPhone, VehicleLicense, MangerCnt
+        } = row;
+
+        const setTimeFormatted = replaceSetTime(SetTime);
+        const assignedTimeFormatted = replaceSetTime(AssignedTime);
+        const endTimeFormatted = replaceSetTime(EndTime);
+        let StatText = '';
+        let StatClass = '';
+        switch (Stat) {
+            case 0: StatText = '접수완료'; StatClass = 'badge text-bg-danger'; break;
+            case 1: StatText = '출동중'; StatClass = 'badge text-bg-warning'; break;
+            case 2: StatText = '수리중'; StatClass = 'badge text-bg-primary'; break;
+            case 3: StatText = '완료'; StatClass = 'badge text-bg-success'; break;
+        }
+
+        /* 셋팅 시작 */
+        $(".span-pop-ReceiptNo").text(ReceiptNo);
+        $(".span-pop-SetTime").text(setTimeFormatted);
+        $(".span-pop-AssignedTime").text(assignedTimeFormatted);
+        $(".span-pop-EndTime").text(endTimeFormatted);
+        $(".span-pop-StatText").removeClass().addClass("span-pop-StatText").addClass(StatClass).text(StatText);
+
+        $(".span-pop-CustomerName").text(CustomerName);
+        $(".span-pop-C_ViheicleLicense").text(C_ViheicleLicense);
+        $(".span-pop-GPS_Lati").text(GPS_Lati);
+        $(".span-pop-GPS_Long").text(GPS_Long);
+        $(".span-pop-LocationText").text(LocationText);
+
+        $(".span-pop-MangerName").text(MangerName);
+        $(".span-pop-MangerPhone").text(MangerPhone);
+        $(".span-pop-VehicleLicense").text(VehicleLicense);
+        $(".span-pop-MangerCnt").text(MangerCnt+'건');
+        $(".span-pop-FaultName").text(FaultName);
+
+        const badgeMap = {
+            0: 'bg-danger',
+            1: 'bg-warning',
+            2: 'bg-primary',
+            3: 'bg-success'
+        };
+        const badgeColor = badgeMap[Stat] || 'bg-secondary';
+
+        let html = `
+        <div style="margin-top: 0px;">
+            <span class="badge ${badgeColor} rounded-circle d-inline-flex justify-content-center align-items-center" style="width: 28px; height: 28px; vertical-align: top;"></span>
+            <span id="span-d-footer-FaultName" style="font-size:1.4rem; margin-left:5px; font-weight:bold;">${FaultName}</span>
+            <br>
+            <span id="span-d-footer-FaultTextMent" style="font-size:1.2rem; margin-left:5px; font-weight:bold;">[조치상세]</span>
+            <br>
+            <span id="span-d-footer-FaultText" style="font-size:1.0rem; margin-left:5px; font-weight:bold;">${FaultText}</span>
+        </div>
+    `;
+
+        [FaultAct1, FaultAct2, FaultAct3].forEach((act, i) => {
+            html += `
+            <div style="margin-top: 15px; margin-bottom:15px; font-size: 1.1rem;">
+                <span class="badge bg-secondary rounded-circle d-inline-flex justify-content-center align-items-center" style="width: 28px; height: 28px; vertical-align: bottom;">
+                    ${i + 1}
+                </span>
+                <span>${act || '-'}</span>
+            </div>
+        `;
+        });
+        $("#span-pop-fault").html(html);
+        resolve();
+    });
+}
+
+export { setRecentFault, setFaultDetail, removeDetail, setFaultDetailPop };

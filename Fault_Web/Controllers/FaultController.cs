@@ -53,5 +53,15 @@ namespace Fault_Web.Controllers
             return Content(jsonString, "application/json");
         }
 
+        [HttpGet("/Fault/GetFaultListDetailPop")]
+        public IActionResult GetFaultListDetailPop(int IncidentID)
+        {
+            DataTable dt = _service.GetFaultListDetailPop(IncidentID);
+
+            string jsonString = JsonConvert.SerializeObject(dt); // ← 핵심
+
+            return Content(jsonString, "application/json");
+        }
+
     }
 }

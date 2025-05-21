@@ -1,5 +1,5 @@
 ﻿// faultService.js (api 호출 부)
-import { setRecentFault, setFaultDetail } from './faultRender.js';
+import { setRecentFault, setFaultDetail, setFaultDetailPop } from './faultRender.js';
 
 // 250513 silee - 실시간 고장 이력
 function faultList() {
@@ -23,10 +23,10 @@ function faultStatToday() {
         type: 'GET',
         dataType: 'json',
         success: function (res) {
-            $("#span-TotalCount").text(res[0].TotalCount);
-            $("#span-InProgressCount").text(res[0].InProgressCount);
-            $("#span-CompletedCount").text(res[0].CompletedCount);
-            $("#span-CompletedRate").text(res[0].CompletedRate);
+            $("#span-TotalCount").text(res[0].TotalCount + '건');
+            $("#span-InProgressCount").text(res[0].InProgressCount + '건');
+            $("#span-CompletedCount").text(res[0].CompletedCount + '건');
+            $("#span-CompletedRate").text(res[0].CompletedRate + '%');
         },
         error: function (xhr, status, error) {
             console.error("오류 발생:", error);
@@ -50,4 +50,30 @@ function recentFaultDetail(IncidentID) {
     });
 }
 
-export { faultList, faultStatToday, recentFaultDetail };
+//250521 silee - 선택된 고장 상세 팝업
+function recentFaultDetailPop(IncidentID) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: '/Fault/GetFaultListDetailPop',
+            type: 'GET',
+            dataType: 'json',
+            data: { IncidentID: IncidentID },
+            success: async function (res) {
+                try {
+                    await setFaultDetailPop(res);
+                    resolve(); 
+                } catch (err) {
+                    console.error("setFaultDetailPop 실패:", err);
+                    reject(err);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX 오류 발생:", error);
+                reject(error);
+            }
+        });
+    });
+}
+
+
+export { faultList, faultStatToday, recentFaultDetail, recentFaultDetailPop };

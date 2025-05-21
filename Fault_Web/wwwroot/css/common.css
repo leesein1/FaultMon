@@ -247,3 +247,43 @@
 .select-tr td {
     background-color: #343a40 !important;
 }
+
+.logo-img {
+    display: inline-block;
+    margin-top:-12px;
+    width: 125px;
+    height: 50px;
+    background-image: url('/img/logo1.svg'); /* 혹은 ~/img/logo.svg → 실제 경로로 맞춰 */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+
+.fault-table table {
+    min-width: 590px; /* 너무 작게 접히지 않게 설정 */
+}
+
+/* wifi loder */
+#wifi-loader {
+    position: fixed; /* 화면에 고정 */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+    #wifi-loader.hidden {
+        display: none !important;
+    }
+
+body {
+    overflow: hidden; /* 로딩 중 스크롤 방지 */
+}

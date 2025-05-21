@@ -15,7 +15,7 @@ namespace Fault_Web.Controllers
         }
 
         // 기본 루트: "/"
-        [HttpGet("")]
+        [HttpGet("index")]
         public IActionResult Index()
         {
             return View();
@@ -23,6 +23,7 @@ namespace Fault_Web.Controllers
 
         // "/index2"로 직접 접근 가능
         [HttpGet("index2")]
+        [HttpGet("")]
         public IActionResult Index2()
         {
             return View();

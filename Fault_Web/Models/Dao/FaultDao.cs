@@ -76,5 +76,28 @@ namespace Fault_Web.Models.Dao
             return dt;
         }
 
+        public DataTable GetFaultListDetailPop(int IncidentID)
+        {
+            DataTable dt = new DataTable();
+
+            using (var conn = _dbHelper.GetFLTConnection())
+            {
+                conn.Open();
+                using (var cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "exec [PROC_RECENT_FAULT_DETAIL_POP] @IncidentID";
+                    cmd.Parameters.AddWithValue("@IncidentID", IncidentID);  // SQL Injection 방지
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        dt.Load(reader);
+                    }
+                }
+            }
+
+            return dt;
+        }
+
     }
 }

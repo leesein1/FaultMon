@@ -13,7 +13,10 @@
           <li class="nav-item">
             <!-- 이 자리에 logo 위치 -->
             <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
-              <i class="h5">실시간 고장관제</i>
+                <div style="display: flex;">
+                    <i class="logo-img"></i>
+                    <div class="h5" style="margin-top:3px;"> - 고장 관제 </div>
+                </div>
             </a>
           </li>
           <!--
@@ -25,106 +28,6 @@
 
         <!-- start::End Navbar Links -->
         <ul class="navbar-nav ms-auto">
-          <!-- start::Messages Dropdown Menu -->
-          <li class="nav-item dropdown">
-            <a class="nav-link" data-bs-toggle="dropdown" href="#">
-              <i class="bi bi-chat-text"></i>
-              <span class="navbar-badge badge text-bg-danger">3</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-              <a href="#" class="dropdown-item">
-                <!-- start::Message -->
-                <div class="d-flex">
-                  <div class="flex-shrink-0">
-                    <img src="~/js/dist/assets/img/user1-128x128.jpg" alt="User Avatar"
-                      class="img-size-50 rounded-circle me-3" />
-                  </div>
-                  <div class="flex-grow-1">
-                    <h3 class="dropdown-item-title">
-                      Brad Diesel
-                      <span class="float-end fs-7 text-danger"><i class="bi bi-star-fill"></i></span>
-                    </h3>
-                    <p class="fs-7">Call me whenever you can...</p>
-                    <p class="fs-7 text-secondary"><i class="bi bi-clock-fill me-1"></i> 4 Hours Ago</p>
-                  </div>
-                </div>
-                <!-- end::Message -->
-              </a>
-              <div class="dropdown-divider"></div>
-
-              <a href="#" class="dropdown-item">
-                <!-- start::Message -->
-                <div class="d-flex">
-                  <div class="flex-shrink-0">
-                    <img src="~/js/dist/assets/img/user8-128x128.jpg" alt="User Avatar"
-                      class="img-size-50 rounded-circle me-3" />
-                  </div>
-                  <div class="flex-grow-1">
-                    <h3 class="dropdown-item-title">
-                      John Pierce
-                      <span class="float-end fs-7 text-secondary"><i class="bi bi-star-fill"></i></span>
-                    </h3>
-                    <p class="fs-7">I got your message bro</p>
-                    <p class="fs-7 text-secondary"><i class="bi bi-clock-fill me-1"></i> 4 Hours Ago</p>
-                  </div>
-                </div>
-                <!-- end::Message -->
-              </a>
-              <div class="dropdown-divider"></div>
-
-              <a href="#" class="dropdown-item">
-                <!-- start::Message -->
-                <div class="d-flex">
-                  <div class="flex-shrink-0">
-                    <img src="~/js/dist/assets/img/user3-128x128.jpg" alt="User Avatar"
-                      class="img-size-50 rounded-circle me-3" />
-                  </div>
-                  <div class="flex-grow-1">
-                    <h3 class="dropdown-item-title">
-                      Nora Silvester
-                      <span class="float-end fs-7 text-warning"><i class="bi bi-star-fill"></i></span>
-                    </h3>
-                    <p class="fs-7">The subject goes here</p>
-                    <p class="fs-7 text-secondary"><i class="bi bi-clock-fill me-1"></i> 4 Hours Ago</p>
-                  </div>
-                </div>
-                <!-- end::Message -->
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-            </div>
-          </li>
-          <!-- end::Messages Dropdown Menu -->
-
-          <!-- start::Notifications Dropdown Menu -->
-          <li class="nav-item dropdown">
-            <a class="nav-link" data-bs-toggle="dropdown" href="#">
-              <i class="bi bi-bell-fill"></i>
-              <span class="navbar-badge badge text-bg-warning">15</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-              <span class="dropdown-item dropdown-header">15 Notifications</span>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="bi bi-envelope me-2"></i> 4 new messages
-                <span class="float-end text-secondary fs-7">3 mins</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="bi bi-people-fill me-2"></i> 8 friend requests
-                <span class="float-end text-secondary fs-7">12 hours</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="bi bi-file-earmark-fill me-2"></i> 3 new reports
-                <span class="float-end text-secondary fs-7">2 days</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-            </div>
-          </li>
-          <!-- end::Notifications Dropdown Menu -->
-
           <!-- start::Fullscreen Toggle -->
           <li class="nav-item">
             <a class="nav-link" href="#" data-lte-toggle="fullscreen">
@@ -241,7 +144,7 @@
                         <i class="bi bi-car-front-fill"></i>
                     </span>
                     <div class="info-box-content">
-                      <span class="info-box-text">금일 발생(건)</span>
+                      <span class="info-box-text">금일 발생</span>
                       <span id="span-TotalCount" class="info-box-number">
                         100
                       </span>
@@ -257,7 +160,7 @@
                       <i class="bi bi-tools"></i>
                     </span>
                     <div class="info-box-content">
-                      <span class="info-box-text">처리중(건)</span>
+                      <span class="info-box-text">처리중</span>
                       <span id="span-InProgressCount"class="info-box-number">60</span>
                     </div>
                     <!-- /.info-box-content -->
@@ -275,7 +178,7 @@
                       <i class="bi bi-gear-fill"></i>
                     </span>
                     <div class="info-box-content">
-                      <span class="info-box-text">완료 건</span>
+                      <span class="info-box-text">완료건</span>
                       <span id="span-CompletedCount" class="info-box-number">760</span>
                     </div>
                     <!-- /.info-box-content -->
@@ -289,7 +192,7 @@
                         <i class="bi bi-percent" style="color:#fff !important;"></i>
                     </span>
                     <div class="info-box-content">
-                      <span class="info-box-text">완료율(%)</span>
+                      <span class="info-box-text">완료율</span>
                       <span id="span-CompletedRate"class="info-box-number">40 </span>
 
                     </div>
@@ -410,7 +313,147 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
             </div>
             <div class="modal-body overflow-auto">
-              여기에 모달 내용을 입력하세요.
+              <!-- 영역 시작 -->
+              <!-- 1차 영역 -->
+              <div class="modal-body row" >
+                <div class="row" style="margin-bottom:15px;">
+                    <div class="col-md-12">
+                        <span class="h4"> [ 사고 내역 ] </span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                    <div class="col-md-4" style="font-size:1.4rem; ">
+                        <div class="" style="margin-bottom:15px;">
+                            <span class="badge rounded-pill text-bg-danger">접수번호</span>
+                        </div>
+                        <div class="" style="margin-bottom:15px;">
+                            <span class="badge rounded-pill text-bg-danger">접수시간</span>
+                        </div>
+                        <div class="" style="margin-bottom:15px;">
+                            <span class="badge rounded-pill text-bg-danger">배정시간</span>
+                        </div>
+                        <div class="" style="margin-bottom:15px;">
+                            <span class="badge rounded-pill text-bg-danger">완료시간</span>
+                        </div>
+                        <div class="" style="margin-bottom:15px;">
+                            <span class="badge rounded-pill text-bg-danger">처리상태</span>
+                        </div>
+                    </div>
+                    <div class="col-md-8" style="font-size:1.4rem;">
+                        <div class="" style="margin-bottom:15.5px;">
+                            <span class="span-pop-ReceiptNo"></span>
+                        </div>
+                        <div class="" style="margin-bottom:15.5px;">
+                            <span class="span-pop-SetTime"></span>
+                        </div>
+                        <div class="" style="margin-bottom:15.5px;">
+                            <span class="span-pop-AssignedTime"></span>
+                        </div>
+                        <div class="" style="margin-bottom:15px;">
+                            <span class="span-pop-EndTime"></span>
+                        </div>
+                        <div class="" style="margin-bottom:15px; ">
+                            <span class="span-pop-StatText"></span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                    <div class="col-md-4" style="font-size:1.4rem;">
+                        <div class="" style="margin-bottom:15px;">
+                            <span class="badge rounded-pill text-bg-danger">접수자</span>
+                        </div>
+                        <div class="" style="margin-bottom:15px;">
+                            <span class="badge rounded-pill text-bg-danger">사고 차량번호</span>
+                        </div>
+                        <div class="" style="margin-bottom:15px;">
+                            <span class="badge rounded-pill text-bg-danger">위도</span>
+                        </div>
+                        <div class="" style="margin-bottom:15px;">
+                            <span class="badge rounded-pill text-bg-danger">경도</span>
+                        </div>
+                        <div class="" style="margin-bottom:15px;">
+                            <span class="badge rounded-pill text-bg-danger">위치정보</span>
+                        </div>
+                    </div>
+                    <div class="col-md-8" style="font-size:1.4rem;">
+                        <div class="" style="margin-bottom:15.5px;">
+                            <span class="span-pop-CustomerName"></span>
+                        </div>
+                        <div class="" style="margin-bottom:15.5px;">
+                            <span class="span-pop-C_ViheicleLicense"></span>
+                        </div>
+                        <div class="" style="margin-bottom:15.5px;">
+                            <span class="span-pop-GPS_Lati"></span>
+                        </div>
+                        <div class="" style="margin-bottom:15px;">
+                            <span class="span-pop-GPS_Long"></span>
+                        </div>
+                        <div class="" style="margin-bottom:15.5px;">
+                            <span class="span-pop-LocationText"></span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+              </div>
+              <!-- 1차 영역 끝 -->
+              <!-- 2차 영역 시작-->
+              <div class="modal-body row" style="padding-bottom:0px;">
+                <div class="row" style="margin-bottom:15px;">
+                    <div class="col-md-12">
+                        <span class="h4"> [ 담당 이력 ] </span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4" style="font-size:1.4rem;">
+                            <div class="" style="margin-bottom:15px;">
+                                <span class="badge rounded-pill text-bg-danger">담당자</span>
+                            </div>
+                            <div class="" style="margin-bottom:15px;">
+                                <span class="badge rounded-pill text-bg-danger">담당자번호</span>
+                            </div>
+                            <div class="" style="margin-bottom:15px;">
+                                <span class="badge rounded-pill text-bg-danger">출동차량</span>
+                            </div>
+                            <div class="" style="margin-bottom:15px;">
+                                <span class="badge rounded-pill text-bg-danger">담당수(선택일)</span>
+                            </div>
+                            <div class="" style="margin-bottom:15px;">
+                                <span class="badge rounded-pill text-bg-danger">고장명칭</span>
+                            </div>
+                        </div>
+                        <div class="col-md-8" style="font-size:1.4rem; padding-left:20px;">
+                            <div class="" style="margin-bottom:15.5px;">
+                                <span class="span-pop-MangerName"></span>
+                            </div>
+                            <div class="" style="margin-bottom:15.5px;">
+                                <span class="span-pop-MangerPhone"></span>
+                            </div>
+                            <div class="" style="margin-bottom:15.5px;">
+                                <span class="span-pop-VehicleLicense"></span>
+                            </div>
+                            <div class="" style="margin-bottom:15px;">
+                                <span class="span-pop-MangerCnt"></span>
+                            </div>
+                            <div class="" style="margin-bottom:15px;">
+                                <span class="span-pop-FaultName"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div id="span-pop-fault" class="col-md-12" style="font-size:1.4rem;">
+                            asd
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <!-- 2차영역 끝 -->
+              <!-- 영역 끝-->
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -432,14 +475,15 @@
     <!--begin::Footer-->
     <footer class="app-footer bg-black">
       <!--begin::To the end-->
-      <div class="float-end d-none d-sm-inline">Anything you want</div>
+      <div class="float-end d-none d-sm-inline">made by. silee</div>
       <!--end::To the end-->
       <!--begin::Copyright-->
       <strong>
-        Copyright &copy; 2014-2024&nbsp;
-        <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
+        @* Copyright &copy; 2014-2024&nbsp; *@
+        실시간 고장 관제 (Demo) &nbsp; - &nbsp; 
+        <a href="https://github.com/leesein1/FaultMon" class="text-decoration-none">GitHub</a>.
       </strong>
-      All rights reserved.
+      
       <!--end::Copyright-->
     </footer>
     <!--end::Footer-->
@@ -448,4 +492,4 @@
   </div>
   <!-- end::App Wrapper -->
   <!--begin::Script-->
-  <script type="module" src="~/js/index2.js"></script>
+  <script type="module" src="~/js/index.js"></script>

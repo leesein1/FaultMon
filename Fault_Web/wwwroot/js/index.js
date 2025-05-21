@@ -1,12 +1,14 @@
 ﻿// 임시 index2전용 js
+// click 기능을 위한 변수
+let isClickLocked = false;
 
 // 250513 silee - 모듈 연동
 import { initModalHandler } from './modules/modal.js';
 import { resizeObj } from './modules/resize.js';
-import { formatSetTime, noticall, replaceSetTime } from './modules/utils.js'
-import { markPos, arrMark, map, handleMarkerClick  } from './modules/mapLayer.js'
+import { map, handleMarkerClick  } from './modules/mapLayer.js'
 import { faultList, faultStatToday, recentFaultDetail } from './modules/faultService.js'
-import { setRecentFault, setFaultDetail, removeDetail } from './modules/faultRender.js';
+import { removeDetail } from './modules/faultRender.js';
+
 $(function () {
     // 250513 silee - 기본 연결 함수
     readyContent();
@@ -18,8 +20,9 @@ async function readyContent() {
     resizeObj(map);
     $(window).on('resize', () => resizeObj(map));
 
-    // ✅ 모든 초기화 끝났을 때 스피너 제거
+    // 모든 초기화 끝났을 때 스피너 제거 + 스크롤 복구
     $('#wifi-loader').fadeOut(700, function () {
+        $('body').css('overflow', 'auto');  //스크롤 복구
         $(this).remove();
     });
 }
@@ -59,6 +62,18 @@ function LoadScreenData() {
 
 // 250520 silee 클릭 이벤트 함수
 window.clk_tr = function (key, idx) {
+    if (isClickLocked) {
+        // 1초 동안 재클릭 막기
+        console.log("클릭 잠금 중, 무시됨");
+        return;
+    }
+
+    isClickLocked = true; // 클릭 잠금 시작
+
+    setTimeout(() => {
+        isClickLocked = false; // 1초 후 잠금 해제
+    }, 1000);
+
     let $targetTr = $("#tr-" + key);
 
     if ($targetTr.hasClass("select-tr")) {

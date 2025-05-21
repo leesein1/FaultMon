@@ -42,6 +42,13 @@ namespace Fault_Web.Models.Service
             return dt;
         }
 
+        public DataTable GetFaultListDetailPop(int IncidentID)
+        {
+            DataTable dt = _dao.GetFaultListDetailPop(IncidentID);
+
+            return dt;
+        }
+
 
 
     }
