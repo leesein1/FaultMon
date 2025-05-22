@@ -13,7 +13,6 @@ export function initModalHandler() {
         try {
             await recentFaultDetailPop(incidentID); // 모든 준비 완료 기다림
             myModal.show(); // 그 다음 모달 띄우기
-            console.log("된건가?");
         } catch (err) {
             console.log("모달 표시 실패:", err);
         }

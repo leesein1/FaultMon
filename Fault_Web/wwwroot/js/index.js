@@ -36,13 +36,12 @@ async function connectSignalR() {
         .build();
 
     connection_db.on("Signal_FLTLIST", () => {
-        console.log("✅ 확인이요 (클라이언트 메시지 받음)");
         LoadScreenData();
     });
 
     connection_db.start()
         .then(() => {
-            console.log("✅ SignalR DB connection Success.");
+            console.log("SignalR DB connection Success.");
             connection_db.invoke("GetAll");
             LoadScreenData();
         })
@@ -64,15 +63,14 @@ function LoadScreenData() {
 window.clk_tr = function (key, idx) {
     if (isClickLocked) {
         // 1초 동안 재클릭 막기
-        console.log("클릭 잠금 중, 무시됨");
         return;
     }
 
     isClickLocked = true; // 클릭 잠금 시작
 
     setTimeout(() => {
-        isClickLocked = false; // 1초 후 잠금 해제
-    }, 1000);
+        isClickLocked = false; // 0.25초 후 잠금 해제
+    }, 300);
 
     let $targetTr = $("#tr-" + key);
 
