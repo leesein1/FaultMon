@@ -1,9 +1,16 @@
-# 🚗 실시간 차량 사고/고장 관제 시스템
+### 🚗 실시간 차량 사고/고장 관제 시스템
+---
 
-## 🔗 데모 링크  
 
-🌐 [실시간 관제 시스템 바로가기](https://your-domain.com)
+## 🚀 시스템 구성 및 접근 방법
 
+- 본 시스템은 **.NET 8 MVC 기반 웹 애플리케이션**으로,  
+  백엔드와 프론트엔드가 하나의 프로젝트 내에서 함께 구성되어 있습니다.
+
+- MSSQL을 통해 데이터 연동 및 실시간 알림 처리(SignalR)를 구현하였으며,  
+  완성된 웹 시스템은 **AWS EC2 인스턴스에 배포되어 IIS를 통해 서비스 중**입니다.
+  
+🌐 [**실시간 관제 시스템 바로가기**] [http://silee-portfolio1.shop] (http://silee-portfolio1.shop)
 
 ## 📌 프로젝트 개요
 
@@ -162,4 +169,85 @@
 | FaultAct1  | VARCHAR(100) |          | 긴급 조치 사항 1     |
 | FaultAct2  | VARCHAR(100) |          | 긴급 조치 사항 2     |
 | FaultAct3  | VARCHAR(100) |          | 긴급 조치 사항 3     |
+
+
+
+---
+
+## 🧮 주요 쿼리 모음
+
+> 아래는 이 시스템에서 활용되는 주요 프로시저 쿼리입니다.  
+> 각 항목을 클릭하면 쿼리 내용을 확인할 수 있습니다.
+
+<details>
+<summary><strong>📌 PROC_GET_FAULT_LIST – 고장 목록 조회</strong></summary>
+
+<br>
+
+```sql
+CREATE PROCEDURE PROC_GET_FAULT_LIST
+    @StartDate DATETIME,
+    @EndDate DATETIME,
+    @Status TINYINT = NULL
+AS
+BEGIN
+    SELECT
+        R.IncidentID,
+        R.ReceiptNo,
+        R.SetTime,
+        R.Stat,
+        F.FaultName,
+        M.MangerName
+    FROM RcvFault R
+    JOIN mt_FaultCode F ON R.FaultID = F.FaultID
+    LEFT JOIN mt_manager M ON R.MangerID = M.MangerID
+    WHERE R.SetTime BETWEEN @StartDate AND @EndDate
+      AND (@Status IS NULL OR R.Stat = @Status)
+    ORDER BY R.SetTime DESC;
+END
+```
+날짜 및 상태 필터 기반으로 고장 이력을 조회하는 프로시저입니다.
+관제 페이지 초기 진입 시 기본 리스트로 활용됩니다.
+</details>
+
+<details> <summary><strong>🛠 PROC_INSERT_FAULT_DUMMY – 더미 고장 데이터 자동 생성</strong></summary>
+ <br>
+```sql
+CREATE PROCEDURE PROC_INSERT_FAULT_DUMMY
+AS
+BEGIN
+    DECLARE @Now DATETIME = GETDATE();
+
+    DECLARE @FaultID INT = (SELECT TOP 1 FaultID FROM mt_FaultCode ORDER BY NEWID());
+    DECLARE @ManagerID INT = (SELECT TOP 1 MangerID FROM mt_manager ORDER BY NEWID());
+    DECLARE @VehicleID INT = (SELECT TOP 1 VehicleID FROM mt_corporate_vehicle ORDER BY NEWID());
+
+    INSERT INTO RcvFault (
+        ReceiptNo, SetTime, FaultID, CustomerName,
+        C_ViheicleLicense, GPS_Lati, GPS_Long,
+        LocationText, MangerID, VehicleID, Stat
+    )
+    VALUES (
+        CONCAT('F-', FORMAT(@Now, 'yyMMddHHmmss')),
+        @Now,
+        @FaultID,
+        '테스트고객',
+        '12가 ' + CAST(ABS(CHECKSUM(NEWID())) % 9000 + 1000 AS VARCHAR),
+        RAND() * (37.6 - 37.3) + 37.3,
+        RAND() * (127.1 - 126.8) + 126.8,
+        '서울시 테스트구 테스트동',
+        @ManagerID,
+        @VehicleID,
+        0
+    )
+END```
+
+SQL Server Agent 작업을 통해 10초마다 자동 실행되도록 설정된 테스트용 프로시저입니다.
+실시간 알림 및 지도 반응 기능을 검증하기 위한 더미 데이터 생성에 활용됩니다.
+
+</details>
+
+## 📄 참고
+
+이 프로젝트는 MIT License 기반의 [AdminLTE 4.0.0-beta3](https://adminlte.io/) 템플릿을 커스터마이징하여 UI를 구성하였습니다.
 
