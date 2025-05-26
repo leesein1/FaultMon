@@ -206,13 +206,13 @@ BEGIN
     ORDER BY R.SetTime DESC;
 END
 ```
-날짜 및 상태 필터 기반으로 고장 이력을 조회하는 프로시저입니다.
-관제 페이지 초기 진입 시 기본 리스트로 활용됩니다.
+> 날짜 및 상태 필터 기반으로 고장 이력을 조회하는 프로시저입니다.
+> 관제 페이지 초기 진입 시 기본 리스트로 활용됩니다.
 </details>
 
 <details> <summary><strong>🛠 PROC_INSERT_FAULT_DUMMY – 더미 고장 데이터 자동 생성</strong></summary>
  <br>
-```sql
+
 CREATE PROCEDURE PROC_INSERT_FAULT_DUMMY
 AS
 BEGIN
@@ -240,10 +240,10 @@ BEGIN
         @VehicleID,
         0
     )
-END```
+END
 
-SQL Server Agent 작업을 통해 10초마다 자동 실행되도록 설정된 테스트용 프로시저입니다.
-실시간 알림 및 지도 반응 기능을 검증하기 위한 더미 데이터 생성에 활용됩니다.
+> SQL Server Agent 작업을 통해 10초마다 자동 실행되도록 설정된 테스트용 프로시저입니다.
+> 실시간 알림 및 지도 반응 기능을 검증하기 위한 더미 데이터 생성에 활용됩니다.
 
 </details>
 
