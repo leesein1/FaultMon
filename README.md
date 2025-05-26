@@ -211,36 +211,31 @@ END
 </details>
 
 <details> <summary><strong>🛠 PROC_INSERT_FAULT_DUMMY – 더미 고장 데이터 자동 생성</strong></summary>
- <br>
 
-CREATE PROCEDURE PROC_INSERT_FAULT_DUMMY
+<br>
+
+```sql
+CREATE PROCEDURE PROC_GET_FAULT_LIST
+    @StartDate DATETIME,
+    @EndDate DATETIME,
+    @Status TINYINT = NULL
 AS
 BEGIN
-    DECLARE @Now DATETIME = GETDATE();
-
-    DECLARE @FaultID INT = (SELECT TOP 1 FaultID FROM mt_FaultCode ORDER BY NEWID());
-    DECLARE @ManagerID INT = (SELECT TOP 1 MangerID FROM mt_manager ORDER BY NEWID());
-    DECLARE @VehicleID INT = (SELECT TOP 1 VehicleID FROM mt_corporate_vehicle ORDER BY NEWID());
-
-    INSERT INTO RcvFault (
-        ReceiptNo, SetTime, FaultID, CustomerName,
-        C_ViheicleLicense, GPS_Lati, GPS_Long,
-        LocationText, MangerID, VehicleID, Stat
-    )
-    VALUES (
-        CONCAT('F-', FORMAT(@Now, 'yyMMddHHmmss')),
-        @Now,
-        @FaultID,
-        '테스트고객',
-        '12가 ' + CAST(ABS(CHECKSUM(NEWID())) % 9000 + 1000 AS VARCHAR),
-        RAND() * (37.6 - 37.3) + 37.3,
-        RAND() * (127.1 - 126.8) + 126.8,
-        '서울시 테스트구 테스트동',
-        @ManagerID,
-        @VehicleID,
-        0
-    )
+    SELECT
+        R.IncidentID,
+        R.ReceiptNo,
+        R.SetTime,
+        R.Stat,
+        F.FaultName,
+        M.MangerName
+    FROM RcvFault R
+    JOIN mt_FaultCode F ON R.FaultID = F.FaultID
+    LEFT JOIN mt_manager M ON R.MangerID = M.MangerID
+    WHERE R.SetTime BETWEEN @StartDate AND @EndDate
+      AND (@Status IS NULL OR R.Stat = @Status)
+    ORDER BY R.SetTime DESC;
 END
+```
 
 > SQL Server Agent 작업을 통해 10초마다 자동 실행되도록 설정된 테스트용 프로시저입니다.
 > 실시간 알림 및 지도 반응 기능을 검증하기 위한 더미 데이터 생성에 활용됩니다.
