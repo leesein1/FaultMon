@@ -390,7 +390,7 @@ BEGIN
 	update [dbo].[RcvFault] set Stat = 3, EndTime = GetDate() where SetTime < dateadd(minute, -6, getdate()) and EndTime is null;
 END
 ```
-> SQL Server Agent 작업을 통해 10초마다 자동 실행되도록 설정된 SignalR 반응용 실시간 삽입 프로시저입니다.
+> SQL Server Agent 작업을 통해 10초마다 자동 실행되도록 설정된 SignalR 반응용 실시간 삽입 프로시저입니다.<br>
 > 실시간 알림 및 지도 반응 기능을 검증하기 위한 더미 데이터 생성에 활용됩니다.
 
 </details>
