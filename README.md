@@ -174,70 +174,223 @@
 
 ---
 
-## 🧮 주요 쿼리 모음
+## 🧮 구성 쿼리 모음
 
 > 아래는 이 시스템에서 활용되는 주요 프로시저 쿼리입니다.  
 > 각 항목을 클릭하면 쿼리 내용을 확인할 수 있습니다.
 
 <details>
-<summary><strong>📌 PROC_GET_FAULT_LIST – 고장 목록 조회</strong></summary>
+<summary><strong>📌 PROC_RECENT_FAULT_LIST – 최근 고장 리스트 현시 </strong></summary>
 
 <br>
 
 ```sql
-CREATE PROCEDURE PROC_GET_FAULT_LIST
-    @StartDate DATETIME,
-    @EndDate DATETIME,
-    @Status TINYINT = NULL
+create PROCEDURE [dbo].[PROC_RECENT_FAULT_LIST]
+
 AS
 BEGIN
-    SELECT
-        R.IncidentID,
-        R.ReceiptNo,
-        R.SetTime,
-        R.Stat,
-        F.FaultName,
-        M.MangerName
-    FROM RcvFault R
-    JOIN mt_FaultCode F ON R.FaultID = F.FaultID
-    LEFT JOIN mt_manager M ON R.MangerID = M.MangerID
-    WHERE R.SetTime BETWEEN @StartDate AND @EndDate
-      AND (@Status IS NULL OR R.Stat = @Status)
-    ORDER BY R.SetTime DESC;
+    SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+    SET NOCOUNT ON;
+
+	select top 100
+	a.IncidentID,a.ReceiptNo,a.SetTime,a.FaultID,b.FaultName,a.AssignedTime,a.EndTime,a.CustomerName,
+	a.C_ViheicleLicense,a.GPS_Lati,a.GPS_Long,a.LocationText,a.MangerID,c.MangerName,a.VehicleID,a.Stat
+	from [KORFaultWeb].[dbo].[RcvFault] as a
+	left join [KORFaultWeb].[dbo].[mt_FaultCode] as b on a.FaultID = b.FaultID
+	left join [KORFaultWeb].[dbo].[mt_manager] as c on a.MangerID = c.MangerID
+	order by IncidentID desc;
+
 END
 ```
-> 날짜 및 상태 필터 기반으로 고장 이력을 조회하는 프로시저입니다.
+> 최근 발생한 고장을 기준으로 고장 리스트 현시를 위한 조회 쿼리입니다.
 > 관제 페이지 초기 진입 시 기본 리스트로 활용됩니다.
+
 </details>
 
-<details> <summary><strong>🛠 PROC_INSERT_FAULT_DUMMY – 더미 고장 데이터 자동 생성</strong></summary>
+<details>
+<summary><strong>📌 PROC_RECENT_FAULT_DETAIL – 고장 리스트 클릭시 우측 하단 요약 및 조치사항 </strong></summary>
 
 <br>
 
 ```sql
-CREATE PROCEDURE PROC_GET_FAULT_LIST
-    @StartDate DATETIME,
-    @EndDate DATETIME,
-    @Status TINYINT = NULL
+create PROCEDURE [dbo].[PROC_RECENT_FAULT_DETAIL]
+    -- Add the parameters for the stored procedure here
+    @IncidentID int
 AS
 BEGIN
-    SELECT
-        R.IncidentID,
-        R.ReceiptNo,
-        R.SetTime,
-        R.Stat,
-        F.FaultName,
-        M.MangerName
-    FROM RcvFault R
-    JOIN mt_FaultCode F ON R.FaultID = F.FaultID
-    LEFT JOIN mt_manager M ON R.MangerID = M.MangerID
-    WHERE R.SetTime BETWEEN @StartDate AND @EndDate
-      AND (@Status IS NULL OR R.Stat = @Status)
-    ORDER BY R.SetTime DESC;
+    SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+    SET NOCOUNT ON;
+
+	select 
+	a.IncidentID,a.ReceiptNo,a.SetTime,a.FaultID,b.FaultName,a.AssignedTime,a.EndTime,a.CustomerName,
+	a.C_ViheicleLicense,a.GPS_Lati,a.GPS_Long,a.LocationText,a.MangerID,c.MangerName,a.VehicleID,a.Stat,
+	b.FaultText, b.FaultAct1, b.FaultAct2, b.FaultAct3
+	from [KORFaultWeb].[dbo].[RcvFault] as a
+	left join [KORFaultWeb].[dbo].[mt_FaultCode] as b on a.FaultID = b.FaultID
+	left join [KORFaultWeb].[dbo].[mt_manager] as c on a.MangerID = c.MangerID
+	where a.IncidentID = @IncidentID
+	order by IncidentID desc;
+
 END
 ```
+> 선택한 고장의 요약 정보 및 조치사항을 현시 합니다.
 
-> SQL Server Agent 작업을 통해 10초마다 자동 실행되도록 설정된 테스트용 프로시저입니다.
+</details>
+
+<details>
+<summary><strong>📌 PROC_RECENT_FAULT_DETAIL_POP – 고장 더블클릭 시 팝업 구성 프로시저 </strong></summary>
+
+<br>
+
+```sql
+create PROCEDURE [dbo].[PROC_RECENT_FAULT_DETAIL_POP]
+    -- Add the parameters for the stored procedure here
+    @IncidentID int
+AS
+BEGIN
+    SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+    SET NOCOUNT ON;
+
+	select 
+	a.IncidentID,a.ReceiptNo,a.SetTime,a.FaultID,b.FaultName,a.AssignedTime,a.EndTime,a.CustomerName,
+	a.C_ViheicleLicense,a.GPS_Lati,a.GPS_Long,a.LocationText,a.MangerID,c.MangerName,a.VehicleID,a.Stat,
+	b.FaultText, b.FaultAct1, b.FaultAct2, b.FaultAct3 , c.MangerPhone, e.VehicleLicense,
+	(
+		select count(*) from [KORFaultWeb].[dbo].[RcvFault] as d 
+		where  d.MangerID = c.MangerID
+		and d.SetTime >= DATEADD(DAY, 0, DATEDIFF(DAY, 0, a.SetTime))
+		and d.SetTime <  DATEADD(DAY, 1, DATEDIFF(DAY, 0, a.SetTime))
+	) as MangerCnt
+	from [KORFaultWeb].[dbo].[RcvFault] as a
+	left join [KORFaultWeb].[dbo].[mt_FaultCode] as b on a.FaultID = b.FaultID
+	left join [KORFaultWeb].[dbo].[mt_manager] as c on a.MangerID = c.MangerID
+	left join [KORFaultWeb].[dbo].[mt_corporate_vehicle] as e on e.VehicleID = a.VehicleID
+	where a.IncidentID = @IncidentID
+	order by IncidentID desc;
+
+END
+```
+> 팝업 구성 요소에 값을 가져오는 프로시져
+
+</details>
+
+<details>
+<summary><strong>📌 PROC_FAULT_STATS_TODAY –  실시간 처리 통계/카운터 현시 </strong></summary>
+
+<br>
+
+```sql
+create PROCEDURE [dbo].[PROC_FAULT_STATS_TODAY]
+
+AS
+BEGIN
+    SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+    SET NOCOUNT ON;
+
+	select
+		count(1) as TotalCount,  -- 금일 전체 건수
+		sum(case when Stat in (1, 2) then 1 else 0 end) as InProgressCount,  -- 출동중/수리중
+		sum(case when Stat = 3 then 1 else 0 end) as CompletedCount,         -- 완료 건수
+		cast(
+			100.0 * sum(case when Stat = 3 then 1 else 0 end) 
+			/ nullif(count(*), 0) 
+			as decimal(5, 2)
+		) as CompletedRate -- 완료율 %
+	from [dbo].[RcvFault]
+	where SetTime >= cast(getdate() as date);
+
+
+END
+```
+> 실시간 처리 통계/카운터 현시를 위한 프로시져
+
+</details>
+
+<details> 
+<summary><strong>🛠 PROC_SCH_REPEAT_INSERT – SignalR 반응을 위한 INSERT 프로시저 </strong></summary>
+<br>
+
+```sql
+create PROCEDURE [dbo].[PROC_SCH_REPEAT_INSERT]
+
+AS
+BEGIN
+    SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+    SET NOCOUNT ON;
+
+	declare @ranVe int , @ranCode int, @ranMan int
+	declare @ranGPS_Lati varchar(100), @ranGPS_Long varchar(100), @ranGPS_Text varchar(100)
+	declare @randomInt int, @randName varchar(100)
+	declare @countToday int, @seq int, @newCode varchar(20)
+
+	/* 차량번호 ID 랜덤 10 */
+	select top 1 @ranVe = [VehicleID]
+	from [KORFaultWeb].[dbo].[mt_corporate_vehicle]
+	order by NEWID();
+	/* 매니저 ID 랜덤 값 */
+	select top 1 @ranMan = [MangerID]
+	from [KORFaultWeb].[dbo].[mt_manager]
+	order by NEWID();
+
+	/* 고장코드 랜덤 값 */
+	select top 1 @ranCode = [FaultID]
+	from [KORFaultWeb].[dbo].[mt_FaultCode]
+	order by NEWID();
+
+	/* GPS 좌표 및 TEXT 값 */
+	select top 1 @ranGPS_Lati = [GPS_Lati], @ranGPS_Long = [GPS_Long] , @ranGPS_Text = [LocationText]
+	from [KORFaultWeb].[dbo].[mt_GPS_Insert_Table]
+	order by NEWID();
+
+	set @randomInt = floor(rand() * 100) + 1
+	set @randName = '사고자'+ cast(@randomInt as varchar)
+
+	declare @today CHAR(6) = CONVERT(CHAR(6), GETDATE(), 12);      -- YYMMDD
+	declare @startOfDay DATETIME = CAST(CONVERT(DATE, GETDATE()) as DATETIME);
+	declare @endOfDay DATETIME = DATEADD(DAY, 1, @startOfDay);
+
+	/* F-250519-0001 같은 번호 생성기 */
+	SELECT @countToday = COUNT(*)
+	from [dbo].[RcvFault]
+	WHERE SetTime >= @startOfDay AND SetTime < @endOfDay;
+
+	SET @seq = @countToday + 1;
+	SET @newCode = 'F-' + @today + '-' + RIGHT('0000' + CAST(@seq as varchar), 4);
+
+	print '--- 변수 출력 ---';
+	print '차량 ID         : ' + CAST(ISNULL(@ranVe, 0) as varchar);
+	print '고장코드 ID     : ' + CAST(ISNULL(@ranCode, 0) as varchar);
+	print '매니저 ID       : ' + CAST(ISNULL(@ranMan, 0) as varchar);
+	print 'GPS 위도        : ' + ISNULL(@ranGPS_Lati, '');
+	print 'GPS 경도        : ' + ISNULL(@ranGPS_Long, '');
+	print 'GPS 위치 설명   : ' + ISNULL(@ranGPS_Text, '');
+	print '랜덤 숫자       : ' + CAST(ISNULL(@randomInt, 0) as varchar);
+	print '랜덤 이름       : ' + ISNULL(@randName, '');
+	print '오늘 삽입 건수  : ' + CAST(ISNULL(@countToday, 0) as varchar);
+	print '시퀀스 번호     : ' + CAST(ISNULL(@seq, 0) as varchar);
+	print '생성된 코드     : ' + ISNULL(@newCode, '');
+
+
+	INSERT INTO RcvFault (
+		ReceiptNo, SetTime, FaultID, AssignedTime, EndTime,
+		CustomerName, C_ViheicleLicense, GPS_Lati, GPS_Long, LocationText,
+		MangerID, VehicleID, Stat
+	)
+	VALUES (
+		@newCode ,GetDate(), @ranCode, GetDate(), NULL,
+		@randName, '269조5969', @ranGPS_Lati, @ranGPS_Long, @ranGPS_Text,
+		@ranMan, @ranVe, 0
+	);
+  
+	/* stat 1 = 출동 중 */
+	update [dbo].[RcvFault] set Stat = 1 where SetTime >= dateadd(minute, -3, getdate()) and SetTime <  dateadd(minute, -1, getdate());
+	/* stat 2 = 출동 중 */
+	update [dbo].[RcvFault] set Stat = 2 where SetTime >= dateadd(minute, -5, getdate()) and SetTime <  dateadd(minute, -3, getdate());
+	/* stat 3 = 완료 */
+	update [dbo].[RcvFault] set Stat = 3, EndTime = GetDate() where SetTime < dateadd(minute, -6, getdate()) and EndTime is null;
+END
+```
+> SQL Server Agent 작업을 통해 10초마다 자동 실행되도록 설정된 SignalR 반응용 실시간 삽입 프로시저입니다.
 > 실시간 알림 및 지도 반응 기능을 검증하기 위한 더미 데이터 생성에 활용됩니다.
 
 </details>
