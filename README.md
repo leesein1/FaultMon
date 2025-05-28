@@ -1,16 +1,31 @@
-### 🚗 실시간 차량 사고/고장 관제 시스템
----
+<h1 align="center">🚗 실시간 차량 사고/고장 관제 시스템</h1>
 
+<p align="center">
+  <img src="./Fault_Web/wwwroot/img/logo1.svg" alt="관제 시스템 로고" />
+</p>
+
+## 📚 목차
+- [🚀 시스템 구성 및 접근 방법](#-시스템-구성-및-접근-방법)
+- [📌 프로젝트 개요](#-프로젝트-개요)
+- [🍀 개발 목적](#-개발-목적)
+- [🎥 시연 영상](#-시연-영상)
+- [💻 사용 기술](#-사용-기술)
+- [✅ 기능 요약](#-관제-서비스-기능-리스트)
+- [📦 테이블 구조](#-테이블-구조-명세서)
+- [📌 ERD 다이어그램](#-erd-다이어그램)
+- [🧮 쿼리 모음](#-구성-쿼리-모음)
+- [🐞 트러블슈팅](#-트러블슈팅-및-기술적-도전-과제)
+- [📄 참고](#-참고)
 
 ## 🚀 시스템 구성 및 접근 방법
-
 - 본 시스템은 **.NET 8 MVC 기반 웹 애플리케이션**으로,  
   백엔드와 프론트엔드가 하나의 프로젝트 내에서 함께 구성되어 있습니다.
 
 - MSSQL을 통해 데이터 연동 및 실시간 알림 처리(SignalR)를 구현하였으며,  
   완성된 웹 시스템은 **AWS EC2 인스턴스에 배포되어 IIS를 통해 서비스 중**입니다.
   
-🌐 [**실시간 관제 시스템 바로가기**] (http://silee-portfolio1.shop)
+🌐 [**실시간 관제 시스템 바로가기**](http://silee-portfolio1.shop)
+
 
 ## 📌 프로젝트 개요
 
@@ -60,16 +75,64 @@
 스스로 설계하고 구현해보며 **기술에 대한 깊이 있는 이해와 실전 감각**을 키울 수 있었습니다.
 
 
-## ⚙️ 핵심 기술 및 사용 환경
+## 🎥 시연 영상
 
-| 분야           | 기술 스택 및 도구                                      | 세부 내용                                                              |
-|----------------|--------------------------------------------------------|------------------------------------------------------------------------|
-| **Frontend**   | HTML / CSS / JavaScript, Leaflet.js, AdminLTE 4, jQuery, Bootstrap 5 | 지도 기반 실시간 위치 표시, 템플릿 커스터마이징, UI 동작 및 이벤트 처리 |
-| **Backend**    | C#, .NET 8.0                                           | MVC 구조, 컨트롤러-서비스-DAO 분리, SignalR 통한 실시간 알림 처리     |
-| **Database**   | MSSQL                                                  | SQL Dependency, Service Broker 연동 처리                              |
-| **Modules**    | JavaScript 모듈화 (ES6 import/export)                 | 기능별 JS 파일 분리, 유지보수성과 재사용성 향상                       |
-| **Dev Tools**  | Visual Studio 2022, SSMS, Git                          | 개발 및 디버깅, DB 관리, 버전관리                                      |
-| **Deployment** | AWS EC2, IIS                                           | EC2 인스턴스를 이용한 서버 운영 및 배포, IIS를 통한 서비스 호스팅     |
+<details>
+<summary><strong>💻 웹 버전 시연 보기</strong></summary>
+<br>
+<img src="./video/web.gif" width="1200" style="border:1px solid #ccc; border-radius:8px;" alt="웹 시연 GIF">
+</details>
+
+<br>
+
+<details>
+<summary><strong>📱 모바일 버전 시연 보기</strong></summary>
+<br>
+<img src="./video/mobile.gif" width="200" style="border:1px solid #ccc; border-radius:8px;" alt="모바일 시연 GIF">
+</details>
+
+
+## 💻 사용 기술
+
+### 🖥️ Frontend  
+![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Leaflet](https://img.shields.io/badge/Leaflet-199900?style=for-the-badge&logo=leaflet&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
+![jQuery](https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white)
+
+---
+
+
+### 🖧 Backend  
+![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![SignalR](https://img.shields.io/badge/SignalR-0082C9?style=for-the-badge&logo=dotnet&logoColor=white)
+
+---
+
+### 🗄️ Database  
+![MSSQL](https://img.shields.io/badge/MSSQL-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
+
+---
+
+### 🛠 Dev & Tools  
+![Visual Studio](https://img.shields.io/badge/Visual%20Studio-5C2D91?style=for-the-badge&logo=visualstudio&logoColor=white)
+![Visual Studio Code](https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
+![SSMS](https://img.shields.io/badge/SSMS-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+
+---
+
+### ☁️ Deployment / Infra  
+![AWS EC2](https://img.shields.io/badge/AWS%20EC2-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![IIS](https://img.shields.io/badge/IIS-0078D7?style=for-the-badge&logo=windows&logoColor=white)
+
+---
+
+### 🧩 Collaboration  
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+
 
 
 
@@ -170,6 +233,33 @@
 | FaultAct2  | VARCHAR(100) |          | 긴급 조치 사항 2     |
 | FaultAct3  | VARCHAR(100) |          | 긴급 조치 사항 3     |
 
+
+---
+
+## 📌 ERD 다이어그램
+
+<details>
+<summary><strong>ERD 다이어그램 보기</strong></summary>
+<br>
+
+![ERD 다이어그램](./img/ERD.png)
+</details>
+
+> 이 ERD(Entity-Relationship Diagram)는 고장 접수 시스템의 핵심 테이블 구조를 시각화한 다이어그램입니다.  
+> 각 테이블 간의 관계는 다음과 같습니다:
+
+- `RcvFault` : 고장 이력의 메인 테이블로, 각 고장에 대한 정보와 관련된 외래 키를 보유합니다.
+  - 🔗 `FaultID` → `mt_FaultCode.FaultID` (고장 유형)
+  - 🔗 `MangerID` → `mt_manager.MangerID` (처리 담당자)
+  - 🔗 `VehicleID` → `mt_corporate_vehicle.VehicleID` (출동 차량)
+
+- `mt_FaultCode` : 고장 유형 코드 정의 테이블입니다. 고장 이름, 상세 설명, 긴급 조치사항 등을 포함합니다.
+
+- `mt_manager` : 고장 처리 담당자 정보를 담고 있는 테이블로, 이름과 연락처를 관리합니다.
+
+- `mt_corporate_vehicle` : 고장 처리에 사용되는 출동 차량 정보를 관리하는 테이블입니다.
+
+> 💬 이를 통해 단일 고장 데이터(`RcvFault`)가 **고장 유형**, **담당자**, **출동 차량**과 어떻게 연결되어 있는지를 시각적으로 한눈에 파악할 수 있습니다.
 
 
 ---
@@ -394,6 +484,66 @@ END
 > 실시간 알림 및 지도 반응 기능을 검증하기 위한 더미 데이터 생성에 활용됩니다.
 
 </details>
+
+---
+
+## 🐞 트러블슈팅 및 기술적 도전 과제
+
+<details>
+<summary><strong>📡 SignalR 실시간 알림 미작동 문제</strong></summary>
+<br>
+
+### 🔍 문제 상황  
+`SqlDependency`를 적용했음에도 **DB에 INSERT가 발생해도 클라이언트 측 알림이 발생하지 않는 현상**이 있었습니다.
+
+---
+
+### 🧩 원인 분석  
+쿼리문에 **3파트 식별자(데이터베이스명.스키마명.테이블명)** 를 사용한 것이 원인이었습니다:
+
+```sql
+-- ❌ 잘못된 예시
+SELECT [IncidentID] FROM [KORFaultWeb].[dbo].[RcvFault]
+
+-- ✅ 올바른 예시
+SELECT [IncidentID] FROM [dbo].[RcvFault]
+
+```
+
+### 📌 요약
+> SqlDependency는 현재 연결된 DB 내의 테이블만 감시할 수 있습니다.
+> DB명을 포함한 쿼리는 무시되며 알림이 발생하지 않습니다. ( SSMS에서는 정상 동작 )
+> Initial Catalog와 쿼리 대상 테이블의 DB가 반드시 일치해야 합니다.
+
+### 🔗 참고 자료
+
+- 📄 [SqlDependency Constructor – Microsoft Docs](https://stackoverflow.com/questions/7588572/what-are-the-limitations-of-sqldependency)
+</details>
+
+---
+
+<details>
+<summary><strong>🛠 AWS RDS 환경에서 SqlDependency 미작동 문제</strong></summary>
+<br>
+
+### 🔍 문제 상황
+- AWS EC2 + RDS(MSSQL) 환경에서 실시간 알림용 `SqlDependency` 적용 시, 알림이 전혀 발생하지 않음
+
+### 🧩 원인 분석
+- RDS는 MSSQL의 **Service Broker** 및 **Query Notification** 관련 기능이 **제한적** 또는 **비활성화**되어 있음
+- 특히 `ENABLE_BROKER` 명령 등 일부 제어 불가
+
+### ✅ 해결 방법
+- EC2 인스턴스에 **MSSQL 직접 설치**
+- `ENABLE_BROKER`, `SqlDependency`, `Service Broker` 설정 후 사용
+- IIS 환경에 ASP.NET 앱 배포 → 정상 작동 확인
+
+### 📝 참고
+- RDS의 SQL Server는 기본적으로 **Service Broker 비활성화**됨
+- 실시간 알림(Query Notification), Linked Server 등 기능이 필요할 경우 **직접 설치된 SQL Server 사용** 필요
+
+</details>
+
 
 ## 📄 참고
 
