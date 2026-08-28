@@ -1,8 +1,8 @@
 # FaultMon V1
 
-.NET 8 MVC로 구현한 차량 고장 관제 시스템의 기존 버전입니다.
+.NET 8 MVC로 구현한 차량 고장 관제 시스템의 첫 버전입니다.
 
-실무에서 접했던 관제 시스템 구조를 개인 프로젝트로 다시 구현했습니다. 현재는 React 프론트와 ASP.NET Core API로 분리한 V2로 개편 중입니다.
+실무에서 접했던 관제 시스템 구조를 개인 프로젝트로 다시 구현했습니다. 화면과 서버 로직이 한 MVC 프로젝트에 들어 있으며, 이후 V2에서 React 프론트와 ASP.NET Core API로 분리했습니다.
 
 - V2 Front: [FaultMon-Front](https://github.com/leesein1/FaultMon-Front)
 - V2 API: [08.SeinServices.Api](https://github.com/leesein1/08.SeinServices.Api)
@@ -21,7 +21,7 @@
 
 ---
 
-## 기술
+## 기술과 구조
 
 **Backend**  
 `.NET 8 MVC` `C#` `SignalR`
@@ -31,12 +31,6 @@
 
 **Database**  
 `MSSQL` `SQL Dependency` `Service Broker`
-
-기존 배포는 AWS EC2 + IIS 환경에서 진행했으며 현재는 중단된 상태입니다.
-
----
-
-## 구조
 
 ```text
 Browser
@@ -57,7 +51,9 @@ Browser
            SignalR
 ```
 
-화면 쪽 JavaScript는 지도, 테이블, 알림 등 기능별 모듈로 분리했습니다.
+화면 JavaScript는 지도, 테이블, 알림 등 기능별 모듈로 분리했습니다.
+
+과거 AWS EC2 + IIS 환경에 배포했으며 현재 해당 배포는 중단된 상태입니다.
 
 ---
 
@@ -77,10 +73,8 @@ Browser
 
 ---
 
-## V2에서 바꾼 부분
+## V2에서 변경한 부분
 
-V1은 MVC 프로젝트 안에 화면과 서버 로직이 함께 있습니다.
+V1의 MVC 통합 구조를 React 프론트와 ASP.NET Core API로 나눴습니다. 고장 조회 기능은 공용 API 서버로 옮기고, 실시간 갱신은 SignalR Hub를 사용합니다.
 
-V2에서는 React 프론트와 ASP.NET Core API를 별도 저장소로 분리했습니다. 고장 조회 기능은 API로 이관했고 실시간 갱신은 SignalR Hub를 사용합니다.
-
-누적 고장 이력 검색도 V2에서 별도 화면과 API로 추가했습니다.
+V1에 없던 누적 고장 이력 검색 화면과 검색 API도 추가했습니다.
